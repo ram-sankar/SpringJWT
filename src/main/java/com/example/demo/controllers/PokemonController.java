@@ -29,8 +29,6 @@ public class PokemonController {
 
     @GetMapping("/{id}")
     public Pokemon getPokemonById (@PathVariable("id") int id) {
-        LoggerUtil.debug("Check");
-        LoggerUtil.info("info");
         return pokemonService.getPokemonById(id);
     }
 
