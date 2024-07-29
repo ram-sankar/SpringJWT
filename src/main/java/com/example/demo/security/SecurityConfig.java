@@ -45,7 +45,7 @@ public class SecurityConfig {
                     .maximumSessions(1) // Example to limit the number of sessions
             )
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("api/v1/auth/**").permitAll()
+                    .requestMatchers("api/v1/auth/**", "swagger-ui/**", "v3/api-docs/**").permitAll()
                     .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

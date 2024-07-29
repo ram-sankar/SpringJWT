@@ -4,7 +4,9 @@ import com.example.demo.dataTransferObject.PokemonResponse;
 import com.example.demo.models.Pokemon;
 import com.example.demo.service.PokemonService;
 import com.example.demo.util.LoggerUtil;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +23,9 @@ public class PokemonController {
 
     @GetMapping
     public ResponseEntity<PokemonResponse> getPokemons (
-            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+            @ParameterObject Pageable pageable
     ) {
-        return ResponseEntity.ok(pokemonService.getAllPokemons(pageNo, pageSize));
+        return ResponseEntity.ok(pokemonService.getAllPokemons(pageable.getPageNumber(), pageable.getPageSize()));
     }
 
     @GetMapping("/{id}")
