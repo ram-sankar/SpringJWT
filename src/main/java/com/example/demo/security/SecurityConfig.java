@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.util.LoggerUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +46,7 @@ public class SecurityConfig {
                     .maximumSessions(1) // Example to limit the number of sessions
             )
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("api/v1/auth/**", "swagger-ui/**", "v3/api-docs/**").permitAll()
+                    .requestMatchers("auth/**", "swagger-ui/**", "v3/api-docs/**").permitAll()
                     .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

@@ -1,9 +1,11 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dataTransferObject.ApiResponse;
 import com.example.demo.dataTransferObject.PokemonResponse;
 import com.example.demo.models.Pokemon;
 import com.example.demo.service.PokemonService;
 import com.example.demo.util.LoggerUtil;
+import com.example.demo.util.constants.ResponseMessages;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/pokemon")
+@RequestMapping("/pokemon")
 public class PokemonController {
     PokemonService pokemonService;
 
@@ -29,8 +31,9 @@ public class PokemonController {
     }
 
     @GetMapping("/{id}")
-    public Pokemon getPokemonById (@PathVariable("id") int id) {
-        return pokemonService.getPokemonById(id);
+    public ApiResponse<Pokemon> getPokemonById (@PathVariable("id") int id) {
+        Pokemon pokemon = pokemonService.getPokemonById(id);
+        return new ApiResponse<>(pokemon, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
     }
 
     @PostMapping

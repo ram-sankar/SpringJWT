@@ -1,30 +1,25 @@
 package com.example.demo.exceptions;
 
+import com.example.demo.util.LoggerUtil;
+import com.example.demo.util.constants.ResponseMessages;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.dataTransferObject.ApiResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Date;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<ErrorObject> handleCustomException(CustomException ex, WebRequest request) {
-        ErrorObject errorObject = new ErrorObject();
-        errorObject.setStatusCode(ex.getStatus().value());
-        errorObject.setMessage(ex.getMessage());
-        errorObject.setTimestamp(new Date());
-        return new ResponseEntity<>(errorObject, ex.getStatus());
+    public ApiResponse<?> handleCustomException(CustomException ex, WebRequest request) {
+        LoggerUtil.error("Handling CustomException: " + ex.getMessage());
+        return new ApiResponse<>(null, ex.getMessage(), ex.getStatus());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
-        ErrorObject errorObject = new ErrorObject();
-        errorObject.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        errorObject.setMessage(ex.getMessage());
-        errorObject.setTimestamp(new Date());
-        return new ResponseEntity<>(errorObject, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ApiResponse<?> handleGlobalException(Exception ex, WebRequest request) {
+        LoggerUtil.error("Handling GlobalException: " + ex.getMessage());
+        return new ApiResponse<>(null, ResponseMessages.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/review")
+@RequestMapping("/review")
 public class ReviewController {
     ReviewService reviewService;
 
