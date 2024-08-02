@@ -31,9 +31,9 @@ public class PokemonController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<Pokemon> getPokemonById (@PathVariable("id") int id) {
+    public ResponseEntity<Pokemon> getPokemonById (@PathVariable("id") int id) {
         Pokemon pokemon = pokemonService.getPokemonById(id);
-        return new ApiResponse<>(pokemon, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
+        return new ResponseEntity<>(pokemon, HttpStatus.OK);
     }
 
     @PostMapping

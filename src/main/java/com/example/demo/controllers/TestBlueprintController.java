@@ -2,9 +2,9 @@ package com.example.demo.controllers;
 
 import com.example.demo.dataTransferObject.ApiResponse;
 import com.example.demo.dataTransferObject.TestBlueprintResponse;
+import com.example.demo.models.TestBlueprint;
 import com.example.demo.service.TestBluePrintService;
 import com.example.demo.util.constants.ResponseMessages;
-import io.swagger.v3.oas.annotations.Parameter;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,11 +24,16 @@ public class TestBlueprintController {
     }
 
     @GetMapping
-    public ApiResponse<TestBlueprintResponse> getTestBlueprints(@ParameterObject Pageable pageable) {
+    public ResponseEntity<ApiResponse<TestBlueprintResponse>> getTestBlueprints(@ParameterObject Pageable pageable) {
         TestBlueprintResponse response = testBluePrintService.getTestBluePrint(pageable);
-        return new ApiResponse<>(response, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
+        ApiResponse<TestBlueprintResponse> apiResponse = new ApiResponse<>(response, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity
+    @PostMapping
+    public ResponseEntity<ApiResponse<Integer>> createTestBluePrint(@RequestBody TestBlueprint testBlueprint) {
+        int id = testBluePrintService.createTestBluePrint(testBlueprint);
+        ApiResponse<Integer> apiResponse = new ApiResponse<>(id, ResponseMessages.CREATED_SUCCESSFULLY);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }

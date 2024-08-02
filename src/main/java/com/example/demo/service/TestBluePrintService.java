@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface TestBluePrintService {
     TestBlueprintResponse getTestBluePrint(Pageable pageable);
+    int createTestBluePrint(TestBlueprint testBlueprint);
 }

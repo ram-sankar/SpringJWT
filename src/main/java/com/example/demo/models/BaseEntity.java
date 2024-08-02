@@ -22,17 +22,17 @@ public abstract class BaseEntity {
     private Instant updatedAt;
 
     @Column(name = "created_by", nullable = false, updatable = false)
-    private String createdBy;
+    private int createdBy;
 
     @Column(name = "updated_by", nullable = false)
-    private String updatedBy;
+    private int updatedBy;
 
     @PrePersist
     protected void onCreate() {
         createdAt = Instant.now();
         updatedAt = Instant.now();
         // Assuming you have a way to get the current user
-        createdBy = getCurrentUser();
+        createdBy = getCurrentUserId();
         updatedBy = createdBy; // Initially the same as createdBy
     }
 
@@ -40,13 +40,15 @@ public abstract class BaseEntity {
     protected void onUpdate() {
         updatedAt = Instant.now();
         // Update the updatedBy field with the current user
-        updatedBy = getCurrentUser();
+        updatedBy = getCurrentUserId();
     }
 
-    protected String getCurrentUser() {
+    protected int getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (authentication != null && authentication.getPrincipal() instanceof UserDetails)
-                ? ((UserDetails) authentication.getPrincipal()).getUsername()
-                : "anonymous";
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            System.out.println(authentication);
+            return ((UserEntity) authentication.getPrincipal()).getId();
+        }
+        return 0;
     }
 }

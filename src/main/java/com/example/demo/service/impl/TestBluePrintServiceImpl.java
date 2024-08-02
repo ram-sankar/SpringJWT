@@ -32,4 +32,13 @@ public class TestBluePrintServiceImpl implements TestBluePrintService {
         response.setTotalElements(response.getTotalElements());
         return response;
     }
+
+    @Override
+    public int createTestBluePrint(TestBlueprint testBlueprint) {
+        TestBlueprint newTestBlueprint = new TestBlueprint();
+        newTestBlueprint.setTitle(testBlueprint.getTitle());
+        newTestBlueprint.setDescription(testBlueprint.getDescription());
+        TestBlueprint createdTestBlueprint = testBluePrintRepository.save(newTestBlueprint);
+        return createdTestBlueprint.getId();
+    }
 }
