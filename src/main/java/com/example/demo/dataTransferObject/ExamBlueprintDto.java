@@ -2,7 +2,7 @@ package com.example.demo.dataTransferObject;
 
 import java.time.Instant;
 
-public class TestBlueprintDto {
+public class ExamBlueprintDto {
     int id;
     String title;
     String description;

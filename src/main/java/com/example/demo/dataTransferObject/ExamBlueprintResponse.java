@@ -1,12 +1,12 @@
 package com.example.demo.dataTransferObject;
-import com.example.demo.models.TestBlueprint;
+import com.example.demo.models.ExamBlueprint;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class TestBlueprintResponse {
-    private List<TestBlueprint> content;
+public class ExamBlueprintResponse {
+    private List<ExamBlueprint> content;
     private int pageNo;
     private int pageSize;
     private int totalElements;

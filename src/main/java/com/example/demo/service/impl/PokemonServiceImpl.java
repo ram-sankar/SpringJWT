@@ -47,7 +47,7 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     public Pokemon getPokemonById(int id) {
-        return pokemonRepository.findById((long) id).orElseThrow(() -> new PokemonNotFoundException("Poekmon Not found"));
+        return pokemonRepository.findById((long) id).orElseThrow(() -> new PokemonNotFoundException("Pokemon Not found"));
     }
 
     @Override
@@ -55,7 +55,6 @@ public class PokemonServiceImpl implements PokemonService {
         Pokemon pokemonData = pokemonRepository.findById((long) id).orElseThrow(() -> new PokemonNotFoundException("Poekmon Not found"));
         pokemonData.setName(pokemon.getName());
         pokemonData.setType(pokemon.getType());
-
         return pokemonRepository.save(pokemonData);
     }
 
