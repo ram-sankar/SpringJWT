@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class ExamBlueprintResponse {
-    private List<ExamBlueprint> content;
+    private List<ExamBlueprintDto> content;
     private int pageNo;
     private int pageSize;
     private int totalElements;

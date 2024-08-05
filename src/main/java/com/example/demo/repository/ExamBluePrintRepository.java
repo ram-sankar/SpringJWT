@@ -4,4 +4,5 @@ import com.example.demo.models.ExamBlueprint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ExamBluePrintRepository extends JpaRepository<ExamBlueprint, Long> {
+    boolean existsByTitle(String title);
 }

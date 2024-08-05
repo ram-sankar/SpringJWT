@@ -1,15 +1,18 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dataTransferObject.ApiResponse;
+import com.example.demo.dataTransferObject.ExamBlueprintDto;
 import com.example.demo.dataTransferObject.ExamBlueprintResponse;
 import com.example.demo.models.ExamBlueprint;
 import com.example.demo.service.ExamBluePrintService;
 import com.example.demo.util.constants.ResponseMessages;
+import jakarta.validation.Valid;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,9 +34,9 @@ public class ExamBlueprintController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ApiResponse<ExamBlueprint>> getTestBlueprints(@PathVariable int id) {
-        ExamBlueprint response = examBluePrintService.getTestBluePrintById(id);
-        ApiResponse<ExamBlueprint> apiResponse = new ApiResponse<>(response, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
+    public ResponseEntity<ApiResponse<ExamBlueprintDto>> getTestBlueprints(@PathVariable int id) {
+        ExamBlueprintDto response = examBluePrintService.getTestBluePrintById(id);
+        ApiResponse<ExamBlueprintDto> apiResponse = new ApiResponse<>(response, ResponseMessages.DATA_FETCHED_SUCCESSFULLY);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 

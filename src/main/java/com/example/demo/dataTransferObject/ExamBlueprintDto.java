@@ -1,13 +1,23 @@
 package com.example.demo.dataTransferObject;
 
-import java.time.Instant;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+import java.time.Instant;
+import java.util.List;
+
+@Data
 public class ExamBlueprintDto {
-    int id;
-    String title;
-    String description;
-    Instant created_at;
-    Instant updated_at;
-    String created_by;
-    String updated_by;
+    private Integer id;
+
+    @NotBlank(message = "title is required")
+    private String title;
+
+    private String description;
+    private List<QuestionRequestDto> questions;
+
+    private Instant createdAt;
+    private Instant updatedAt;
+    private String createdBy;
+    private String updatedBy;
 }
