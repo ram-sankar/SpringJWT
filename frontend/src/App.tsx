@@ -1,8 +1,11 @@
+import { RouterProvider } from "react-router-dom";
+import routes from "./config/routes";
+
 function App() {
   return (
-    <div className="App">
-      Working...
-    </div>
+    <main className="App">
+        <RouterProvider router={routes} />
+      </main>
   );
 }
 
